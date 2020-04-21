@@ -1,0 +1,10 @@
+﻿{
+  "profiles": {
+    "PrometheusSolarExporter": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}

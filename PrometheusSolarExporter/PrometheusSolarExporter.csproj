@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <UserSecretsId>dotnet-PrometheusSolarExporter-63DB5FC4-F514-4E9D-A321-E4541EE2B133</UserSecretsId>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.3" />
+        <PackageReference Include="prometheus-net" Version="3.5.0" />
+    </ItemGroup>
+</Project>
