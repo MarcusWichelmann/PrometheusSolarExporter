@@ -18,7 +18,7 @@ namespace PrometheusSolarExporter.Sources.SamilPowerInverters
     public class SamilPowerInverterListener : BackgroundService
     {
         private const int TcpListenPort = 60001;
-        private const int AdvertisementInterval = 30 * 1000;
+        private const int AdvertisementInterval = 15 * 1000;
 
         private readonly ILoggerFactory _loggerFactory;
         private readonly ILogger<SamilPowerInverterListener> _logger;

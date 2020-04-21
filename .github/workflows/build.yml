@@ -13,13 +13,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Build image
-        run: docker build -t image .
+      - name: Build image for amd64
+        run: docker build -t image:amd64 .
+
+      - name: Build image for arm32v7
+        run: docker build -t image:arm32v7 --build-arg RUNTIME=3.1-buster-slim-arm32v7 --build-arg PUBLISH_RID=linux-arm  .
+
+      - name: Build image for arm64v8
+        run: docker build -t image:arm64v8 --build-arg RUNTIME=3.1-buster-slim-arm64v8 --build-arg PUBLISH_RID=linux-arm  .
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
 
-      - name: Push image
+      - name: Push images
         run: |
           IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
 
@@ -36,6 +42,11 @@ jobs:
           echo IMAGE_ID=$IMAGE_ID
           echo BRANCH_OR_TAG=$BRANCH_OR_TAG
 
-          # Tag and push image
-          docker tag image $IMAGE_ID:$BRANCH_OR_TAG
-          docker push $IMAGE_ID:$BRANCH_OR_TAG
+          # Create manifest list
+          docker manifest create $IMAGE_ID:$BRANCH_OR_TAG image:amd64 image:arm32v7 image:arm64v8
+          docker manifest annotate --arch amd64 $IMAGE_ID:$BRANCH_OR_TAG image:amd64
+          docker manifest annotate --arch amd64 $IMAGE_ID:$BRANCH_OR_TAG image:arm32v7
+          docker manifest annotate --arch amd64 $IMAGE_ID:$BRANCH_OR_TAG image:arm64v8
+
+          # Push manifest list
+          docker manifest push $IMAGE_ID:$BRANCH_OR_TAG
