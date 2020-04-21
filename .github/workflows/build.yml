@@ -1,0 +1,41 @@
+name: Build
+on:
+  - push
+
+env:
+  IMAGE_NAME: prometheus-solar-exporter
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Build image
+        run: docker build -t image .
+
+      - name: Log into registry
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+
+      - name: Push image
+        run: |
+          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+
+          # Change all uppercase to lowercase
+          IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
+
+          # Strip git ref prefix from version
+          BRANCH_OR_TAG=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+
+          # Use Docker `latest` tag convention
+          [ "$VERSION" == "master" ] && VERSION=latest
+
+          # Print variables
+          echo IMAGE_ID=$IMAGE_ID
+          echo BRANCH_OR_TAG=$BRANCH_OR_TAG
+
+          # Tag and push image
+          docker tag image $IMAGE_ID:$BRANCH_OR_TAG
+          docker push $IMAGE_ID:$BRANCH_OR_TAG
