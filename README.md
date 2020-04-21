@@ -47,8 +47,8 @@ Finer grained configuration and environment variables are supported. Please cons
 
 ## Contributing
 
-Contributions like fixes or support for additional inverters are always welcome. For other vendors, just add a new Source implementation to the `PrometheusSolarExporter/Sources/` directory and initialize it in `Program.cs`.
+Contributions like fixes or support for additional inverters are always welcome. For other vendors, just add a new source implementation to the `PrometheusSolarExporter/Sources/` directory and initialize it in `Program.cs`.
 
-In case you have another not yet supported Samil Power inverter, feel free to enhance the existing `SamilPowerInverters` source and add some switches for the slightly different message formats.
+In case you have access to another, not yet supported, Samil Power inverter, feel free to enhance the existing `SamilPowerInverters` source and add some switches for the slightly different message formats.
 
 #### Have fun!
