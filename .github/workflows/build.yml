@@ -30,7 +30,7 @@ jobs:
           BRANCH_OR_TAG=$(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
 
           # Use Docker `latest` tag convention
-          [ "$VERSION" == "master" ] && VERSION=latest
+          [ "$BRANCH_OR_TAG" == "master" ] && BRANCH_OR_TAG=latest
 
           # Print variables
           echo IMAGE_ID=$IMAGE_ID
