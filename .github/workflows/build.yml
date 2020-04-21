@@ -55,11 +55,11 @@ jobs:
           docker push $IMAGE_ID:$BRANCH_OR_TAG-arm32v7
           docker push $IMAGE_ID:$BRANCH_OR_TAG-arm64v8
 
-          # Create manifest list
-          docker manifest create $IMAGE_ID:$BRANCH_OR_TAG $IMAGE_ID:$BRANCH_OR_TAG-amd64 $IMAGE_ID:$BRANCH_OR_TAG-arm32v7 $IMAGE_ID:$BRANCH_OR_TAG-arm64v8
-          docker manifest annotate --arch amd64 $IMAGE_ID:$BRANCH_OR_TAG $IMAGE_ID:$BRANCH_OR_TAG-amd64
-          docker manifest annotate --arch armv7 $IMAGE_ID:$BRANCH_OR_TAG $IMAGE_ID:$BRANCH_OR_TAG-arm32v7
-          docker manifest annotate --arch arm64 $IMAGE_ID:$BRANCH_OR_TAG $IMAGE_ID:$BRANCH_OR_TAG-arm64v8
+          # Create manifest list !! BUG: https://github.com/docker/cli/issues/2396
+          #docker manifest create $IMAGE_ID:$BRANCH_OR_TAG $IMAGE_ID:$BRANCH_OR_TAG-amd64 $IMAGE_ID:$BRANCH_OR_TAG-arm32v7 $IMAGE_ID:$BRANCH_OR_TAG-arm64v8
+          #docker manifest annotate --os linux --arch amd64 $IMAGE_ID:$BRANCH_OR_TAG $IMAGE_ID:$BRANCH_OR_TAG-amd64
+          #docker manifest annotate --os linux --arch armv7 $IMAGE_ID:$BRANCH_OR_TAG $IMAGE_ID:$BRANCH_OR_TAG-arm32v7
+          #docker manifest annotate --os linux --arch arm64 $IMAGE_ID:$BRANCH_OR_TAG $IMAGE_ID:$BRANCH_OR_TAG-arm64v8
 
           # Push manifest list
-          docker manifest push $IMAGE_ID:$BRANCH_OR_TAG
+          #docker manifest push $IMAGE_ID:$BRANCH_OR_TAG
