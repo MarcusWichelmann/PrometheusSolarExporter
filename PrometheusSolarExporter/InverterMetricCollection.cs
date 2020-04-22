@@ -1,9 +1,5 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using Prometheus;
 using PrometheusSolarExporter.Sources;
-using PrometheusSolarExporter.Sources.SamilPowerInverters.Protocol.Messages.Responses;
 
 namespace PrometheusSolarExporter
 {

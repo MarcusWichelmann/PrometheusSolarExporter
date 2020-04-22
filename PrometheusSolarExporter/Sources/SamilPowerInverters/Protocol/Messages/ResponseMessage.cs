@@ -1,5 +1,4 @@
 using System;
-using System.Buffers.Binary;
 
 namespace PrometheusSolarExporter.Sources.SamilPowerInverters.Protocol.Messages
 {

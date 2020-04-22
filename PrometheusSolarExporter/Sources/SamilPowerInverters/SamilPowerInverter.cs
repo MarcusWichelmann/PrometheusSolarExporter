@@ -3,12 +3,9 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
-using Prometheus;
 using PrometheusSolarExporter.Sources.SamilPowerInverters.Protocol;
-using PrometheusSolarExporter.Sources.SamilPowerInverters.Protocol.Messages;
 using PrometheusSolarExporter.Sources.SamilPowerInverters.Protocol.Messages.Requests;
 using PrometheusSolarExporter.Sources.SamilPowerInverters.Protocol.Messages.Responses;
-using Timer = System.Timers.Timer;
 
 namespace PrometheusSolarExporter.Sources.SamilPowerInverters
 {

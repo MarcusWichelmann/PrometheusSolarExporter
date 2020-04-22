@@ -8,7 +8,6 @@ using System.Timers;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using PrometheusSolarExporter.Sources.SamilPowerInverters.Protocol;
-using PrometheusSolarExporter.Sources.SamilPowerInverters.Protocol.Messages;
 using PrometheusSolarExporter.Sources.SamilPowerInverters.Protocol.Messages.Requests;
 using PrometheusSolarExporter.Sources.SamilPowerInverters.Protocol.Messages.Responses;
 using Timer = System.Timers.Timer;
