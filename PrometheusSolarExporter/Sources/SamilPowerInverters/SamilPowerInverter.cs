@@ -96,7 +96,7 @@ namespace PrometheusSolarExporter.Sources.SamilPowerInverters
 
             _logger.LogDebug("Updating status data for inverter {identification}...", Identification);
 
-            // Wait for initial communication before accepting inverter connection
+            // Request current status
             StatusDataResponse statusData = await _protocol
                 .SendRequestAsync<StatusDataResponse>(_tcpClient.Client, new StatusDataRequest(), cancellationToken)
                 .ConfigureAwait(false);
