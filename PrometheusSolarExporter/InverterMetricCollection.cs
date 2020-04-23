@@ -41,7 +41,7 @@ namespace PrometheusSolarExporter
         private readonly Counter _totalOperationHours = Metrics.CreateCounter($"{Prefix}_total_operation_hours",
             "Total operation hours", InverterModelLabel, InverterIdentificationLabel);
 
-        private readonly Counter _energyToday = Metrics.CreateCounter($"{Prefix}_energy_today",
+        private readonly Gauge _energyToday = Metrics.CreateGauge($"{Prefix}_energy_today",
             "Generated energy today in kWh", InverterModelLabel, InverterIdentificationLabel);
 
         private readonly Gauge _outputPower = Metrics.CreateGauge($"{Prefix}_output_power", "Output power in watts",
@@ -81,7 +81,7 @@ namespace PrometheusSolarExporter
             => _totalOperationHours.WithLabels(inverter.Model, inverter.Identification).IncTo(hours);
 
         public void RecordEnergyToday(IInverter inverter, double energy)
-            => _energyToday.WithLabels(inverter.Model, inverter.Identification).IncTo(energy);
+            => _energyToday.WithLabels(inverter.Model, inverter.Identification).Set(energy);
 
         public void RecordOutputPower(IInverter inverter, double power)
             => _outputPower.WithLabels(inverter.Model, inverter.Identification).Set(power);
