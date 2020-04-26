@@ -20,7 +20,7 @@ namespace PrometheusSolarExporter
         private readonly Gauge _pvCurrent = Metrics.CreateGauge($"{Prefix}_pv_current", "PV current in amperes",
             InverterModelLabel, InverterIdentificationLabel, PvNumberLabel);
 
-        private readonly Gauge _pvPower = Metrics.CreateGauge($"{Prefix}_pv_power", "PV power in watts",
+        private readonly Gauge _pvPower = Metrics.CreateGauge($"{Prefix}_pv_power", "PV power in VA",
             InverterModelLabel, InverterIdentificationLabel, PvNumberLabel);
 
         private readonly Gauge _inverterTemp = Metrics.CreateGauge($"{Prefix}_inverter_temp", "Inverter temperature",

@@ -16,9 +16,9 @@ namespace PrometheusSolarExporter.Sources.SamilPowerInverters.Protocol.Messages.
 
         public double Pv2Current { get; private set; } // Amperes
 
-        public double Pv1Power => Pv1Voltage * Pv1Current; // Watts
+        public double Pv1Power => Pv1Voltage * Pv1Current; // VA
 
-        public double Pv2Power => Pv2Voltage * Pv2Current; // Watts
+        public double Pv2Power => Pv2Voltage * Pv2Current; // VA
 
         public double InverterTemp { get; private set; } // Degrees
 
