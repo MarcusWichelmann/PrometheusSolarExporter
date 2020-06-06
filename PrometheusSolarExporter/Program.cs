@@ -35,6 +35,7 @@ namespace PrometheusSolarExporter
             services.AddHostedService<ExporterService>();
 
             // Add support for Samil Power inverters
+            services.Configure<SamilPowerOptions>(context.Configuration.GetSection("SamilPower"));
             services.AddSingleton<SamilPowerProtocol>();
             services.AddHostedService<SamilPowerInverterListener>();
 
