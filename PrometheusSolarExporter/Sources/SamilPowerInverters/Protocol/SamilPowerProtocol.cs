@@ -5,6 +5,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using PrometheusSolarExporter.Options;
 using PrometheusSolarExporter.Sources.SamilPowerInverters.Protocol.Messages;
 using PrometheusSolarExporter.Sources.SamilPowerInverters.Protocol.Messages.Requests;
@@ -16,18 +17,19 @@ namespace PrometheusSolarExporter.Sources.SamilPowerInverters.Protocol
         private const int AdvertisementBroadcastPort = 60000;
 
         private readonly ILogger<SamilPowerProtocol> _logger;
-        private readonly SamilPowerOptions _samilPowerOptions;
+        private readonly IOptions<SamilPowerOptions> _samilPowerOptions;
 
         private readonly UdpClient _udpBroadcastClient;
 
-        public SamilPowerProtocol(ILogger<SamilPowerProtocol> logger, SamilPowerOptions samilPowerOptions)
+        public SamilPowerProtocol(ILogger<SamilPowerProtocol> logger, IOptions<SamilPowerOptions> samilPowerOptions)
         {
             _logger = logger;
             _samilPowerOptions = samilPowerOptions;
 
-            if (samilPowerOptions.BroadcastSourceAddress != null)
+            string? broadcastSourceAddress = samilPowerOptions.Value.BroadcastSourceAddress;
+            if (broadcastSourceAddress != null)
             {
-                var localEndPoint = new IPEndPoint(IPAddress.Parse(samilPowerOptions.BroadcastSourceAddress), 0);
+                var localEndPoint = new IPEndPoint(IPAddress.Parse(broadcastSourceAddress), 0);
                 _udpBroadcastClient = new UdpClient(localEndPoint);
             }
             else
